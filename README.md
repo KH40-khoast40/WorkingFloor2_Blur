@@ -7,7 +7,7 @@ Original version can be found here: https://hariganep.seesaa.net/
 Load **WorkingFloor2_Blur.pmx** *(it has the same role as the .x file in the original version, but now with sliders for configurations, and a bone to move/rotate the surface)*
 
 # Notices
-- Make **WorkingFloor2_Blur.pmx** be **last** in the "model display order" table
+- Make **WorkingFloor2_Blur.pmx** be **last** in the "model display order" table, or else it won't look right when the surface is semi-transparent
 
 - In case the effect causes low frame rate *(bc you run serveral surfaces at once, or your computer is simply a potato)*, you can change the resolution of the reflection by changing the **#define Resolution** value in **WorkingFloor2_Blur.fx**. Reasonably low resolution should still look decent when being blurred, and it increases the frame rate
 
