@@ -4,7 +4,7 @@ An edited version of WorkingFloor2 by 針金P, with new function to make the ref
 Original version can be found here: https://hariganep.seesaa.net/
 
 # Usage
-Load **WorkingFloor2_Blur.pmx** *(it has the same role as the .x file in the original version, but now with sliders for options, and a bone to move/rotate the surface)*
+Load **WorkingFloor2_Blur.pmx** *(it has the same role as the .x file in the original version, but now with sliders for configurations, and a bone to move/rotate the surface)*
 
 # Notices
 - Make **WorkingFloor2_Blur.pmx** be **last** in the "model display order" table
