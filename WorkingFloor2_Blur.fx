@@ -1,22 +1,22 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//  WorkingFloor2_Blur ver0.0.8_edit_1.0  ƒIƒtƒXƒNƒŠ[ƒ“ƒŒƒ“ƒ_‚ğg‚Á‚½°–Ê‹¾‘œ•`‰æC°‚Éd–‚ğ‚³‚¹‚Ü‚·
-//  ì¬: j‹àP( •‘—Í‰î“üP‚ÌMirror.fx, full.fx,‰ü•Ï )
+//  WorkingFloor2_Blur ver0.0.8_edit_1.0  ã‚ªãƒ•ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¬ãƒ³ãƒ€ã‚’ä½¿ã£ãŸåºŠé¢é¡åƒæç”»ï¼ŒåºŠã«ä»•äº‹ã‚’ã•ã›ã¾ã™
+//  ä½œæˆ: é‡é‡‘P( èˆåŠ›ä»‹å…¥Pæ°ã®Mirror.fx, full.fx,æ”¹å¤‰ )
 //
-//	Blur function added by KH40
+//	Blur function added by KH40 (https://github.com/KH40-khoast40/WorkingFloor2_Blur)
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #define Resolution 1.0 //1.0 is the highest resolution. 0.2 is the lowest resolution with acceptable result when being blurred
 
-// ‚±‚±‚Ìƒpƒ‰ƒ[ƒ^‚ğ•ÏX‚µ‚Ä‚­‚¾‚³‚¢
+// ã“ã“ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’å¤‰æ›´ã—ã¦ãã ã•ã„
 
-#define XFileMirror  0  // ƒAƒNƒZƒTƒŠ(XFile)‚à‹¾‘œ‰»‚·‚é‚Í‚±‚±‚ğ1‚É‚·‚é
+#define XFileMirror  0  // ã‚¢ã‚¯ã‚»ã‚µãƒª(XFile)ã‚‚é¡åƒåŒ–ã™ã‚‹æ™‚ã¯ã“ã“ã‚’1ã«ã™ã‚‹
 
-#define FLG_EXCEPTION  0  // MMD‚Åƒ‚ƒfƒ‹‹¾‘œ‚ª³í‚É•`‰æ‚³‚ê‚È‚¢ê‡‚Í‚±‚±‚ğ1‚É‚·‚é
+#define FLG_EXCEPTION  0  // MMDã§ãƒ¢ãƒ‡ãƒ«é¡åƒãŒæ­£å¸¸ã«æç”»ã•ã‚Œãªã„å ´åˆã¯ã“ã“ã‚’1ã«ã™ã‚‹
 
 
-// ‰ğ‚ç‚È‚¢l‚Í‚±‚±‚©‚ç‰º‚Í‚¢‚¶‚ç‚È‚¢‚Å‚Ë
+// è§£ã‚‰ãªã„äººã¯ã“ã“ã‹ã‚‰ä¸‹ã¯ã„ã˜ã‚‰ãªã„ã§ã­
 
 float Script : STANDARDSGLOBAL <
 	string ScriptOutput = "color";
@@ -26,36 +26,36 @@ float Script : STANDARDSGLOBAL <
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-// À•W•ÏŠ·s—ñ
+// åº§æ¨™å¤‰æ›è¡Œåˆ—
 float4x4 WorldMatrix     : WORLD;
 float4x4 ViewMatrix      : VIEW;
 float4x4 ProjMatrix      : PROJECTION;
 float4x4 ViewProjMatrix  : VIEWPROJECTION;
 
-//ƒJƒƒ‰ˆÊ’u
+//ã‚«ãƒ¡ãƒ©ä½ç½®
 float3 CameraPosition : POSITION  < string Object = "Camera"; >;
 
-// “§‰ß’l
+// é€éå€¤
 float Blur : CONTROLOBJECT < string name = "(self)"; string item = "Blur"; >;
 float Transparency : CONTROLOBJECT < string name = "(self)"; string item = "Transparency"; >;
 
 
 #ifndef MIKUMIKUMOVING
     #if(FLG_EXCEPTION == 0)
-        #define OFFSCREEN_FX_OBJECT  "WF_Object.fxsub"      // ƒIƒtƒXƒNƒŠ[ƒ“‹¾‘œ•`‰æƒGƒtƒFƒNƒg
+        #define OFFSCREEN_FX_OBJECT  "WF_Object.fxsub"      // ã‚ªãƒ•ã‚¹ã‚¯ãƒªãƒ¼ãƒ³é¡åƒæç”»ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
     #else
-        #define OFFSCREEN_FX_OBJECT  "WF_ObjectExc.fxsub"   // ƒIƒtƒXƒNƒŠ[ƒ“‹¾‘œ•`‰æƒGƒtƒFƒNƒg
+        #define OFFSCREEN_FX_OBJECT  "WF_ObjectExc.fxsub"   // ã‚ªãƒ•ã‚¹ã‚¯ãƒªãƒ¼ãƒ³é¡åƒæç”»ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
     #endif
     #define ADD_HEIGHT   (0.05f)
     #define GET_VPMAT(p) (ViewProjMatrix)
 #else
-    #define OFFSCREEN_FX_OBJECT  "WF_Object_MMM.fxsub"  // ƒIƒtƒXƒNƒŠ[ƒ“‹¾‘œ•`‰æƒGƒtƒFƒNƒg
+    #define OFFSCREEN_FX_OBJECT  "WF_Object_MMM.fxsub"  // ã‚ªãƒ•ã‚¹ã‚¯ãƒªãƒ¼ãƒ³é¡åƒæç”»ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
     #define ADD_HEIGHT   (0.01f)
     #define GET_VPMAT(p) (MMM_IsDinamicProjection ? mul(ViewMatrix, MMM_DynamicFov(ProjMatrix, length(CameraPosition-p.xyz))) : ViewProjMatrix)
 #endif
 
 
-// °–Ê‹¾‘œ•`‰æ‚ÌƒIƒtƒXƒNƒŠ[ƒ“ƒoƒbƒtƒ@
+// åºŠé¢é¡åƒæç”»ã®ã‚ªãƒ•ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒãƒƒãƒ•ã‚¡
 texture WorkingFloorRT : OFFSCREENRENDERTARGET <
     string Description = "OffScreen RenderTarget for WorkingFloor.fx";
     float2 ViewPortRatio = {Resolution,Resolution};
@@ -121,13 +121,13 @@ sampler BlurYSamp = sampler_state {
 #define  WT_6  0.0447932
 #define  WT_7  0.0345379
 
-// ƒXƒNƒŠ[ƒ“ƒTƒCƒY
+// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚µã‚¤ã‚º
 float2 ViewportSize : VIEWPORTPIXELSIZE;
 static float2 ViewportOffset = float2(0.5f, 0.5f)/ViewportSize;
 static float2 SampStep = (float2(EXTENT,EXTENT)/ViewportSize*ViewportSize.y);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-//°–Ê‹¾‘œ•`‰æ
+//åºŠé¢é¡åƒæç”»
 
 struct VS_OUTPUT {
     float4 Pos  : POSITION;
@@ -138,11 +138,11 @@ VS_OUTPUT VS_Mirror(float4 Pos : POSITION)
 {
     VS_OUTPUT Out = (VS_OUTPUT)0;
 
-    // ƒ[ƒ‹ƒhÀ•W•ÏŠ·
+    // ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™å¤‰æ›
     Pos = mul( Pos, WorldMatrix );
-    Pos.y += ADD_HEIGHT;  // °‚Æd‚È‚Á‚Ä‚¿‚ç‚Â‚­‚Ì‚ğ‰ñ”ğ‚·‚é‚½‚ß
+    Pos.y += ADD_HEIGHT;  // åºŠã¨é‡ãªã£ã¦ã¡ã‚‰ã¤ãã®ã‚’å›é¿ã™ã‚‹ãŸã‚
 
-    // ƒJƒƒ‰‹“_‚Ìƒrƒ…[Ë‰e•ÏŠ·
+    // ã‚«ãƒ¡ãƒ©è¦–ç‚¹ã®ãƒ“ãƒ¥ãƒ¼å°„å½±å¤‰æ›
     Pos = mul( Pos, GET_VPMAT(Pos) );
 
     Out.Pos = Pos;
@@ -153,11 +153,11 @@ VS_OUTPUT VS_Mirror(float4 Pos : POSITION)
 
 float4 PS_Mirror(VS_OUTPUT IN) : COLOR
 {
-    // ‹¾‘œ‚ÌƒXƒNƒŠ[ƒ“‚ÌÀ•W(¶‰E”½“]‚µ‚Ä‚¢‚é‚Ì‚ÅŒ³‚É–ß‚·)
+    // é¡åƒã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®åº§æ¨™(å·¦å³åè»¢ã—ã¦ã„ã‚‹ã®ã§å…ƒã«æˆ»ã™)
     float2 texCoord = float2( 1.0f - ( IN.VPos.x/IN.VPos.w + 1.0f ) * 0.5f,
                               1.0f - ( IN.VPos.y/IN.VPos.w + 1.0f ) * 0.5f ) + ViewportOffset;
 
-    // ‹¾‘œ‚ÌF
+    // é¡åƒã®è‰²
     float4 Color = tex2D(BlurYSamp, texCoord);
     Color.a *= (1-Transparency);
 
@@ -176,9 +176,9 @@ VS_OUTPUT_BLUR VS_Blur( float4 Pos : POSITION, float4 Tex : TEXCOORD0 )
     VS_OUTPUT_BLUR Out = (VS_OUTPUT_BLUR)0; 
     
     //Pos = mul( Pos, WorldMatrix );
-    //Pos.y += ADD_HEIGHT;  // °‚Æd‚È‚Á‚Ä‚¿‚ç‚Â‚­‚Ì‚ğ‰ñ”ğ‚·‚é‚½‚ß
+    //Pos.y += ADD_HEIGHT;  // åºŠã¨é‡ãªã£ã¦ã¡ã‚‰ã¤ãã®ã‚’å›é¿ã™ã‚‹ãŸã‚
 
-    // ƒJƒƒ‰‹“_‚Ìƒrƒ…[Ë‰e•ÏŠ·
+    // ã‚«ãƒ¡ãƒ©è¦–ç‚¹ã®ãƒ“ãƒ¥ãƒ¼å°„å½±å¤‰æ›
     //Pos = mul( Pos, GET_VPMAT(Pos) );
 
     Out.Pos = Pos;
@@ -227,7 +227,7 @@ float4 PS_BlurY(float2 Tex : TEXCOORD0 ) : COLOR
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-//ƒeƒNƒjƒbƒN
+//ãƒ†ã‚¯ãƒ‹ãƒƒã‚¯
 
 float4 ClearColor = {1,1,1,0};
 float ClearDepth  = 1.0;
@@ -313,7 +313,7 @@ technique MainTec_ss
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-//•`‰æ‚µ‚È‚¢
+//æç”»ã—ãªã„
 technique ShadowTec < string MMDPass = "shadow"; > { }
 technique ZplotTec < string MMDPass = "zplot"; > { }
 
