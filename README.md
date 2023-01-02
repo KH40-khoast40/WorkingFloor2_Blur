@@ -11,6 +11,8 @@ Load **WorkingFloor2_Blur.pmx** *(it has the same role as the .x file in the ori
 
 - In case the effect causes low frame rate *(bc you run serveral surfaces at once, or your computer is simply a potato)*, you can change the resolution of the reflection by changing the **#define Resolution** value in **WorkingFloor2_Blur.fx**. Reasonably low resolution should still look decent when being blurred, and it increases the frame rate
 
+- If the model doesn't have reflection, chance that it doesn't have *WF_Object.fxsub* applied in the WorkingFloorRT tab of MME
+
 # Rules
 - Feel free to edit, and distribute the edit
 - Don't re-distribute the effect without changing anything. Instead, link to this page
